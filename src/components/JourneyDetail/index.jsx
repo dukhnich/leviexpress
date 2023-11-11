@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './style.css';
 import { BusStop } from '../BusStop';
+import { SelectedSeat } from '../SelectedSeat';
 
 export const JourneyDetail = ({ journey }) => {
   const [cities, setCities] = useState([]);
@@ -36,5 +37,6 @@ export const JourneyDetail = ({ journey }) => {
     <div className="stops">
       {(journey.stops || []).map(stop => <BusStop key={stop.code} {...stop}/>)}
     </div>
+    <SelectedSeat number={journey.autoSeat} />
   </div>
 )};
