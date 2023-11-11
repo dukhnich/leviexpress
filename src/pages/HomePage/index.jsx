@@ -36,7 +36,7 @@ export const HomePage = () => {
       {journey ? (
         <>
           <JourneyDetail journey={journey} />
-          <SeatPicker seats={journey.seats} journeyId={journey.journeyId} />
+          <SeatPicker {...journey} />
           <div className="controls container">
             <button className="btn btn--big" type="button" onClick={handleBuy}>Rezervovat</button>
           </div>
