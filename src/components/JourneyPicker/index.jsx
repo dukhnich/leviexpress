@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { CityOptions } from '../CityOptions';
 import './style.css';
 
 export const JourneyPicker = ({ onJourneyChange }) => {
+  const [cities, setCities] = useState([]);
   const [fromCity, setFromCity] = useState('');
   const [toCity, setToCity] = useState('');
   const [date, setDate] = useState('');
+  useEffect(() => {
+    const getCities = async () => {
+      const response = await fetch('https://apps.kodim.cz/daweb/leviexpress/api/cities');
+      const data = await response.json();
+      setCities(data?.results || []);
+    };
+    getCities();
+  }, [])
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log('Odesílám formulář s cestou', fromCity, toCity, date);
@@ -16,25 +26,11 @@ export const JourneyPicker = ({ onJourneyChange }) => {
       <form className="journey-picker__form" onSubmit={handleSubmit}>
         <label>
           <div className="journey-picker__label">Odkud:</div>
-          <select value={fromCity} onChange={e => setFromCity(e.target.value)}>
-            <option value="">Vyberte</option>
-            <option value="mesto01">Město 01</option>
-            <option value="mesto02">Město 02</option>
-            <option value="mesto03">Město 03</option>
-            <option value="mesto04">Město 04</option>
-            <option value="mesto05">Město 05</option>
-          </select>
+          <CityOptions cities={cities} onChange={setFromCity} />
         </label>
         <label>
           <div className="journey-picker__label">Kam:</div>
-          <select value={toCity} onChange={e => setToCity(e.target.value)}>
-            <option value="">Vyberte</option>
-            <option value="mesto01">Město 01</option>
-            <option value="mesto02">Město 02</option>
-            <option value="mesto03">Město 03</option>
-            <option value="mesto04">Město 04</option>
-            <option value="mesto05">Město 05</option>
-          </select>
+          <CityOptions cities={cities} onChange={setToCity} />
         </label>
         <label>
           <div className="journey-picker__label">Datum:</div>
