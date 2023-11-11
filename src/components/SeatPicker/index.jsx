@@ -1,6 +1,5 @@
 import './style.css';
 import { SeatRow } from '../SeatRow';
-import { useState } from 'react';
 
 export const SeatPicker = ({ seats, userSeat, onSeatSelected }) => {
   return (
