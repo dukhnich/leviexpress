@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import './style.css';
 
 export const CityOptions = ({ cities, onChange }) => {
   const [selected, setSelected] = useState('');
